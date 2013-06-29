@@ -1,0 +1,34 @@
+NodeClass
+
+TransitionClass
+
+NodeInstance
+
+TransitionInstance
+	
+
+
+
+SetupMachine
+	Nodes(NodeInstance List)
+	Transitions(TransitionInstance List)
+
+	get
+	set
+
+	add
+	add
+
+	remove
+	remove
+
+
+Parameter
+	type(String)
+	value(String)
+
+	getType
+	getValue
+
+	setType
+	setValue
