@@ -72,7 +72,6 @@ public class NodesPart  {
 			// Provide data in Text format
 			Transfer[] types = new Transfer[] {TextTransfer.getInstance()};
 			source.setTransfer(types);
-			new Label(parent, SWT.NONE);
 			
 			Label lblTest = new Label(parent, SWT.NONE);
 			lblTest.setText("test");

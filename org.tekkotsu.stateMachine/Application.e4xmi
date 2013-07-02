@@ -2,16 +2,16 @@
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_X3COoN6dEeKAoZ7lQqI4sg" elementId="org.tekkotsu.stateMachine.application">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_nNWmcN6fEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.trimmedwindow.0" label="Tekkotsu State Machine" x="100" y="100" width="600" height="600">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_pWvp8N6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.perspectivestack">
-      <children xsi:type="advanced:Perspective" xmi:id="_wD-W8N6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.perspective" label="To-do">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_1OgiIN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partsashcontainer.0">
-          <children xsi:type="basic:PartStack" xmi:id="_3dW_UN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.0">
-            <children xsi:type="basic:Part" xmi:id="_45MEIN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.Nodes" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.NodesPart" label=" Nodes"/>
+      <children xsi:type="advanced:Perspective" xmi:id="_wD-W8N6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.perspective" label="">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_McK7kN6iEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partsashcontainer.1" containerData="" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_1OgiIN6hEeKAoZ7lQqI4sg" elementId="defaultClasses" containerData="">
+            <children xsi:type="basic:PartStack" xmi:id="_3dW_UN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.0">
+              <children xsi:type="basic:Part" xmi:id="_45MEIN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.Nodes" containerData="" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.NodesPart" label=" Nodes"/>
+            </children>
+            <children xsi:type="basic:PartStack" xmi:id="_5hjEoN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.1">
+              <children xsi:type="basic:Part" xmi:id="_5zxdEN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.Links" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.LinksPart" label="Links"/>
+            </children>
           </children>
-          <children xsi:type="basic:PartStack" xmi:id="_5hjEoN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.1">
-            <children xsi:type="basic:Part" xmi:id="_5zxdEN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.Links" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.LinksPart" label="Links"/>
-          </children>
-        </children>
-        <children xsi:type="basic:PartSashContainer" xmi:id="_McK7kN6iEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partsashcontainer.1" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_P3cIkN6iEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.2">
             <children xsi:type="basic:Part" xmi:id="_QVVlgN6iEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.MyFirstBehavior" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.MyFirstBehaviorPart" label="MyFirstBehavior"/>
           </children>

@@ -12,6 +12,12 @@
                name="appName"
                value="tekkotsu">
          </property>
+         
+         <property
+         	name = "applicationCSS"
+         	value = "platform:/plugin/org.tekkotsu.stateMachine/css/default.css">
+         </property>
+         
       </product>
    </extension>
 
