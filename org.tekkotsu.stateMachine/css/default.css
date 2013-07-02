@@ -1,13 +1,13 @@
 .MPartStack{
 
-	background-color: red;
-	border-bottom: 2px solid blue;
-}
-
-.MPartStack{
-
 	width: 100px;
 	swt-maximize-visible: false;
 	swt-minimize-visible: false;
-
+	border-color: blue;
+	
 }
+
+Button{
+	border-color: blue;
+}
+
