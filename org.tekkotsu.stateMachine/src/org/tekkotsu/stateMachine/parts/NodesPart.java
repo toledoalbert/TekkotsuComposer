@@ -57,7 +57,7 @@ public class NodesPart  {
 		
 		
 		
-		// Enable a label as a Drag Source
+			// Enable a label as a Drag Source
 			final Label dragLabel = new Label(parent, SWT.BORDER);
 			dragLabel.setText("Drag this text");
 			
@@ -76,13 +76,13 @@ public class NodesPart  {
 			Label lblTest = new Label(parent, SWT.NONE);
 			lblTest.setText("test");
 			
-			Ellipse ellipse=new Ellipse();
+			/*Ellipse ellipse=new Ellipse();
 			
 			ellipse.setBackgroundColor(ColorConstants.darkBlue);
 			ellipse.setPreferredSize(60, 40);
 			Rectangle blah = new Rectangle();
 			//blah.setDimension(ellipse.getPreferredSize());
-			//((IFigure) lblTest).add(ellipse, new Rectangle());
+			//((IFigure) lblTest).add(ellipse, new Rectangle());*/
 			
 			
 			
@@ -97,27 +97,12 @@ public class NodesPart  {
 			ArrayList<TransitionClass> transitions= new DefaultClassReader().getTransitions();
 			
 			
-			
-			Figure root= new Figure();
-			
-			
-			
-	root.setFont(parent.getFont());
-	XYLayout layout = new XYLayout();
-	root.setLayoutManager(layout);
-	
-	//Use canvas to display root figure
-	/*Canvas canvas2=new Canvas(parent, SWT.DOUBLE_BUFFERED);
-	
-	canvas2.setBackground(ColorConstants.white);
-	LightweightSystem lws= new LightweightSystem(canvas);
-	new Label(parent, SWT.NONE);
-	lws.setContents(root);
-*/
+		
+
 	
 	
 			
-			/*canvas.addPaintListener(new PaintListener() { 
+			canvas.addPaintListener(new PaintListener() { 
 		        public void paintControl(PaintEvent e) { 
 		        	
 		         
@@ -125,20 +110,20 @@ public class NodesPart  {
 		            int x = canvas.getBounds().width;
 		            int y = canvas.getBounds().height;
 		            e.gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		            //e.gc.drawPolygon(new int[] { 27,10,55,55,10,55 });
-		            //e.gc.fillPolygon(new int[] { 27,10,55,55,10,55 });
-		            //e.gc.drawText("Turn",16,35, true); 
-		            //DragSource dragSource = new DragSource(polygon, DND.DROP_MOVE);
+		            e.gc.drawPolygon(new int[] { 27,10,55,55,10,55 });
+		            e.gc.fillPolygon(new int[] { 27,10,55,55,10,55 });
+		            e.gc.drawText("Turn",16,35, true); 
 		            
-		            e.gc.drawRectangle(5,5,50,45);
-		            e.gc.fillRectangle(5, 5, 50, 45);
+		            
+		            //e.gc.drawRectangle(5,5,50,45);
+		           // e.gc.fillRectangle(5, 5, 50, 45);
 		            
 		            
 		            
 		        }
 
 				
-			});*/
+			});
 			
 			
 	       
