@@ -127,29 +127,6 @@ public class NodesPart  {
 			});
 			
 			
-	       
-			
-			
-			/*Button btnFind = new Button(parent, SWT.NONE);
-			GridData gd_btnFind = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-			gd_btnFind.widthHint = 99;
-			btnFind.setLayoutData(gd_btnFind);
-			btnFind.setText("Find");
-			new Label(parent, SWT.NONE);
-			
-			Button btnSpeak = new Button(parent, SWT.NONE);
-			GridData gd_btnSpeak = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-			gd_btnSpeak.widthHint = 99;
-			btnSpeak.setLayoutData(gd_btnSpeak);
-			btnSpeak.setText("Speak");
-			new Label(parent, SWT.NONE);
-			
-			Button btnPlay = new Button(parent, SWT.NONE);
-			GridData gd_btnPlay = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-			gd_btnPlay.widthHint = 99;
-			btnPlay.setLayoutData(gd_btnPlay);
-			btnPlay.setText("Play");
-			new Label(parent, SWT.NONE);*/
 			 
 	
 	
