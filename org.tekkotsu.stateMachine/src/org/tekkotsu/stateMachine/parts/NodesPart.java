@@ -62,10 +62,11 @@ public class NodesPart  {
 			dragLabel.setText("Drag this text");
 			
 		
-			
+			Label foo = new Label(parent, SWT.NONE);
+			foo.setText("foo");
 			 
 			// Allow data to be copied or moved from the drag source
-			int operations = DND.DROP_MOVE | DND.DROP_COPY;
+			int operations = DND.DROP_COPY;
 			DragSource source = new DragSource(dragLabel, operations);
 			 
 			// Provide data in Text format
@@ -89,12 +90,13 @@ public class NodesPart  {
 			//Canvas creation---***
 			Canvas canvas = new Canvas(parent, SWT.NONE);
 			GridData gd_canvas = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+			canvas.setBackground(SWTResourceManager.getColor(SWT.COLOR_CYAN));
 			gd_canvas.heightHint = 65;
 			canvas.setLayoutData(gd_canvas);
 			//Create root figure and layout container
 		
-			ArrayList<NodeClass> nodes = new DefaultClassReader().getNodes();
-			ArrayList<TransitionClass> transitions= new DefaultClassReader().getTransitions();
+			//ArrayList<NodeClass> nodes = new DefaultClassReader().getNodes();
+			//ArrayList<TransitionClass> transitions= new DefaultClassReader().getTransitions();
 			
 			
 		
@@ -110,9 +112,9 @@ public class NodesPart  {
 		            int x = canvas.getBounds().width;
 		            int y = canvas.getBounds().height;
 		            e.gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		            e.gc.drawPolygon(new int[] { 27,10,55,55,10,55 });
-		            e.gc.fillPolygon(new int[] { 27,10,55,55,10,55 });
-		            e.gc.drawText("Turn",16,35, true); 
+		            e.gc.drawPolygon(new int[] { 25,5,45,45,5,45 });
+		            e.gc.fillPolygon(new int[] { 25,5,45,45,5,45 });
+		            //e.gc.drawText("Turn",16,35, true); 
 		            
 		            
 		            //e.gc.drawRectangle(5,5,50,45);
