@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ASCII"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_X3COoN6dEeKAoZ7lQqI4sg" elementId="org.tekkotsu.stateMachine.application">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_nNWmcN6fEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.trimmedwindow.0" label="Tekkotsu State Machine" x="100" y="100" width="600" height="600">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_pWvp8N6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.perspectivestack">
+      <children xsi:type="advanced:Perspective" xmi:id="_wD-W8N6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.perspective" label="To-do">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_1OgiIN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partsashcontainer.0">
+          <children xsi:type="basic:PartStack" xmi:id="_3dW_UN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.0">
+            <children xsi:type="basic:Part" xmi:id="_45MEIN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.Nodes" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.NodesPart" label=" Nodes"/>
+          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_5hjEoN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.1">
+            <children xsi:type="basic:Part" xmi:id="_5zxdEN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.Links" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.LinksPart" label="Links"/>
+          </children>
+        </children>
+        <children xsi:type="basic:PartSashContainer" xmi:id="_McK7kN6iEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partsashcontainer.1" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_P3cIkN6iEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.partstack.2">
+            <children xsi:type="basic:Part" xmi:id="_QVVlgN6iEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.part.MyFirstBehavior" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.parts.MyFirstBehaviorPart" label="MyFirstBehavior"/>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_gOz1EN6hEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.menu.0"/>
+    <trimBars xmi:id="_WBTMUN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.trimbar.0">
+      <children xsi:type="menu:ToolBar" xmi:id="_XbR3AN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.toolbar.0">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_aCTjoN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.handledtoolitem.0" label="File">
+          <menu xmi:id="_eh8XsN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.menu.1">
+            <children xsi:type="menu:HandledMenuItem" xmi:id="_g7PKUN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.handledmenuitem.0" label="Save" command="_7pLNkN6jEeKAoZ7lQqI4sg"/>
+            <children xsi:type="menu:MenuSeparator" xmi:id="_wOAJwN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.menuseparator.0"/>
+            <children xsi:type="menu:HandledMenuItem" xmi:id="_w0eT4N6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.handledmenuitem.1" label="Exit" command="__Jt8IN6jEeKAoZ7lQqI4sg"/>
+            <children xsi:type="menu:MenuSeparator" xmi:id="_x2_g0N6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.menuseparator.1"/>
+            <children xsi:type="menu:HandledMenuItem" xmi:id="_yXKOoN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.handledmenuitem.2" label="New" command="_DAtb0N6kEeKAoZ7lQqI4sg"/>
+          </menu>
+        </children>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0SLJ0N6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.handledtoolitem.1" label="Edit">
+          <menu xmi:id="_19xwAN6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.menu.2">
+            <children xsi:type="menu:HandledMenuItem" xmi:id="_26oZ0N6uEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.handledmenuitem.3" label="Run" command="_NDa24N6kEeKAoZ7lQqI4sg"/>
+          </menu>
+        </children>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_2QmI4N6vEeKAoZ7lQqI4sg" elementId="org.tekkotsu.stateMachine.save" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.Handlers.SaveHandler" command="_7pLNkN6jEeKAoZ7lQqI4sg"/>
+  <handlers xmi:id="_8UTXwN6vEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.Exit" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.Handlers.ExitHandler" command="__Jt8IN6jEeKAoZ7lQqI4sg"/>
+  <handlers xmi:id="_8xDlMN6vEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.Run" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.Handlers.RunHandler" command="_NDa24N6kEeKAoZ7lQqI4sg"/>
+  <handlers xmi:id="_9I1MAN6vEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.NewFile" contributionURI="bundleclass://org.tekkotsu.stateMachine/org.tekkotsu.stateMachine.Handlers.NewHandler" command="_DAtb0N6kEeKAoZ7lQqI4sg"/>
+  <bindingTables xmi:id="_Lm1HoN6lEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.bindingtable.0" bindingContext="_HhUq0N6lEeKAoZ7lQqI4sg">
+    <bindings xmi:id="_OiRlEN6lEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.keybinding.0" keySequence="M1+X" command="__Jt8IN6jEeKAoZ7lQqI4sg"/>
+    <bindings xmi:id="_BsZCUN6mEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.keybinding.1" keySequence="M1+S" command="_7pLNkN6jEeKAoZ7lQqI4sg"/>
+  </bindingTables>
+  <rootContext xmi:id="_HhUq0N6lEeKAoZ7lQqI4sg" elementId="org.tekkotsu.statemachine.bindingcontext.0" name="Windows and Dialogs"/>
+  <commands xmi:id="_7pLNkN6jEeKAoZ7lQqI4sg" elementId="org.eclipse.ui.file.saveAll" commandName="Save"/>
+  <commands xmi:id="__Jt8IN6jEeKAoZ7lQqI4sg" elementId="org.eclipse.ui.file.exit" commandName="Exit"/>
+  <commands xmi:id="_DAtb0N6kEeKAoZ7lQqI4sg" elementId="org.tekkotsu.stateMachine.new" commandName="New File"/>
+  <commands xmi:id="_NDa24N6kEeKAoZ7lQqI4sg" elementId="org.tekkotsu.stateMachine.run" commandName="Run"/>
+  <addons xmi:id="_X3COod6dEeKAoZ7lQqI4sg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_X3COot6dEeKAoZ7lQqI4sg" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_X3COo96dEeKAoZ7lQqI4sg" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_X3COpN6dEeKAoZ7lQqI4sg" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_X3COpd6dEeKAoZ7lQqI4sg" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_X3COpt6dEeKAoZ7lQqI4sg" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+</application:Application>

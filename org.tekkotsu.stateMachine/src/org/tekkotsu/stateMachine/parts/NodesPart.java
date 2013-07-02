@@ -49,6 +49,7 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Point;
 import org.tekkotsu.api.DefaultClassReader;
 import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.api.TransitionClass;
 public class NodesPart  {
 	@PostConstruct
 	public void createUserInterface(Composite parent) throws IOException {
@@ -80,8 +81,8 @@ public class NodesPart  {
 			ellipse.setBackgroundColor(ColorConstants.darkBlue);
 			ellipse.setPreferredSize(60, 40);
 			Rectangle blah = new Rectangle();
-			blah.setDimension(ellipse.getPreferredSize());
-			((IFigure) lblTest).add(ellipse, new Rectangle());
+			//blah.setDimension(ellipse.getPreferredSize());
+			//((IFigure) lblTest).add(ellipse, new Rectangle());
 			
 			
 			
