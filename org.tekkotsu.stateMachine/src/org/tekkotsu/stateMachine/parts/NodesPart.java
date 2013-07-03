@@ -50,20 +50,26 @@ import org.eclipse.swt.graphics.Point;
 import org.tekkotsu.api.DefaultClassReader;
 import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.api.TransitionClass;
+import org.tekkotsu.api.*;
+
+
+
 public class NodesPart  {
 	@PostConstruct
 	public void createUserInterface(Composite parent) throws IOException {
 			
 			parent.setLayout(new GridLayout(2, false));
 		
-		
-		
+			
+			
+			
+			
 			// Create a label
 			final Label dragLabel = new Label(parent, SWT.BORDER);
 			//Set a text to the label
 			dragLabel.setText("Drag this text");
 			 
-			// Create integet to represent copy operation
+			// Create integer to represent copy operation
 			int operations = DND.DROP_COPY;
 			
 			//Create a drag source with the label created and the operations.
