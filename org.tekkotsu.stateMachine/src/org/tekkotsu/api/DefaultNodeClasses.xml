@@ -1,8 +1,0 @@
-<!DOCTYPE root SYSTEM "RootElement.dtd">
-<DefaultNodeClasses>
-	<NodeClass name="SoundNode" definition="Plays a sound, then signals completion." color="blue">
-		<SetupMachine name="setup"></SetupMachine>
-		<ArrayList name="parents"></ArrayList>
-		<ConstructorCall name="constructor">
-			<ArrayList name="parameters">
-				<Parameter type="String" value="musicFile" helpText="Enter the name of a music file with extension."></Parameter></ArrayList></ConstructorCall></NodeClass></DefaultNodeClasses>
