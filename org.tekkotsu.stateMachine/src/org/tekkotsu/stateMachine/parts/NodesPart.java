@@ -62,12 +62,16 @@ public class NodesPart  {
 			//Create lables for nodeclasses from xml file
 			//Get lists of default classes
 			ArrayList<NodeClass> nodes = new DefaultClassReader().getNodes();
-
 			
+			//Make arraylist for labels
+			ArrayList<Label> labels = new ArrayList<Label>();
+			
+			//go trough the nodeclasses and create a label with name for each.
 			for(int i = 0; i < nodes.size(); i++){
 				
 				Label nodeLabel = new Label(parent, SWT.BORDER);
 				nodeLabel.setText(nodes.get(i).getName());
+				labels.add(nodeLabel);
 			}
 			
 			

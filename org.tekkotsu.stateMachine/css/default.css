@@ -1,3 +1,8 @@
+#defaultClasses{
+	width: 100px;
+	swt-width: 100px;
+}
+
 .MTrimmedWindow { 
     background-color: #444444;
 }
