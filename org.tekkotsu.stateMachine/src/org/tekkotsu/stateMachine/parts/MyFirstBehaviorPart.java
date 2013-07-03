@@ -18,16 +18,16 @@ public class MyFirstBehaviorPart {
 	@PostConstruct
 	public void createUserInterface(Composite parent) {
 		
-		// Enable a table as a Drop Target
+			// Enable a table as a Drop Target
 			final Table dropTable = new Table(parent, SWT.BORDER);
 			 
-			    TableItem item = new TableItem(dropTable, SWT.NONE);
-			    item.setText("Test");
+			TableItem item = new TableItem(dropTable, SWT.NONE);
+			item.setText("Test");
 			
 			 
 			// Allow data to be copied or moved to the drop target
 			int operations = DND.DROP_MOVE | DND.DROP_COPY | DND.DROP_DEFAULT;
-		DropTarget target = new DropTarget(dropTable, operations);
+			DropTarget target = new DropTarget(dropTable, operations);
 			 
 			// Receive data in Text or File format
 			final TextTransfer textTransfer = TextTransfer.getInstance();
@@ -44,6 +44,7 @@ public class MyFirstBehaviorPart {
 			             event.detail = DND.DROP_NONE;
 			         }
 			     }
+			     
 			     // will accept text but prefer to have files dropped
 			     for (int i = 0; i < event.dataTypes.length; i++) {
 			         if (fileTransfer.isSupportedType(event.dataTypes[i])){

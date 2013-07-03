@@ -53,39 +53,29 @@ import org.tekkotsu.api.TransitionClass;
 public class NodesPart  {
 	@PostConstruct
 	public void createUserInterface(Composite parent) throws IOException {
+			
 			parent.setLayout(new GridLayout(2, false));
 		
 		
 		
-			// Enable a label as a Drag Source
+			// Create a label
 			final Label dragLabel = new Label(parent, SWT.BORDER);
+			//Set a text to the label
 			dragLabel.setText("Drag this text");
-			
-		
-			Label foo = new Label(parent, SWT.NONE);
-			foo.setText("foo");
 			 
-			// Allow data to be copied or moved from the drag source
+			// Create integet to represent copy operation
 			int operations = DND.DROP_COPY;
+			
+			//Create a drag source with the label created and the operations.
 			DragSource source = new DragSource(dragLabel, operations);
 			 
-			// Provide data in Text format
+			// Create array of type transfer with texttransfer instance
 			Transfer[] types = new Transfer[] {TextTransfer.getInstance()};
+			//Set the types array to the source.
 			source.setTransfer(types);
 			
-			Label lblTest = new Label(parent, SWT.NONE);
-			lblTest.setText("test");
 			
-			/*Ellipse ellipse=new Ellipse();
-			
-			ellipse.setBackgroundColor(ColorConstants.darkBlue);
-			ellipse.setPreferredSize(60, 40);
-			Rectangle blah = new Rectangle();
-			//blah.setDimension(ellipse.getPreferredSize());
-			//((IFigure) lblTest).add(ellipse, new Rectangle());*/
-			
-			
-			
+
 			//Canvas creation---***
 			Canvas canvas = new Canvas(parent, SWT.NONE);
 			GridData gd_canvas = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
