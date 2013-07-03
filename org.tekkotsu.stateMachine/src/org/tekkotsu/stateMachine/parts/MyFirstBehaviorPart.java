@@ -20,9 +20,6 @@ public class MyFirstBehaviorPart {
 		
 			// Enable a table as a Drop Target
 			final Table dropTable = new Table(parent, SWT.BORDER);
-			 
-			TableItem item = new TableItem(dropTable, SWT.NONE);
-			item.setText("Test");
 			
 			 
 			// Allow data to be copied or moved to the drop target

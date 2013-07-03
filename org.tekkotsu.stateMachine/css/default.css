@@ -1,6 +1,8 @@
-#defaultClasses{
-	width: 100px;
-	swt-width: 100px;
+Label{
+
+	background-color: white;
+	font-size: 20px;
+
 }
 
 .MTrimmedWindow { 

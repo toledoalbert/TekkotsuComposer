@@ -66,58 +66,55 @@ public class NodesPart  {
 			//Make arraylist for labels
 			ArrayList<Label> labels = new ArrayList<Label>();
 			
-			//go trough the nodeclasses and create a label with name for each.
-			for(int i = 0; i < nodes.size(); i++){
-				
-				Label nodeLabel = new Label(parent, SWT.BORDER);
-				nodeLabel.setText(nodes.get(i).getName());
-				labels.add(nodeLabel);
-			}
-			
-			
-			// Create a label
-			final Label dragLabel = new Label(parent, SWT.BORDER);
-
-			//Set a text to the label
-			dragLabel.setText("Drag this text");
-			 
 			// Create integer to represent copy operation
 			int operations = DND.DROP_COPY;
 			
-			//Create a drag source with the label created and the operations.
-			DragSource source = new DragSource(dragLabel, operations);
-			 
 			// Create array of type transfer with texttransfer instance
 			Transfer[] types = new Transfer[] {TextTransfer.getInstance()};
-			//Set the types array to the source.
-			source.setTransfer(types);
 			
-	
-			//add Drag listener to the dragsource
-			source.addDragListener(new DragSourceListener() {
+			//go trough the nodeclasses and create a label with name for each.
+			for(int i = 0; i < nodes.size(); i++){
 				
-				//start the drag (can give conditions in which we don't want to start.)
-				public void dragStart(DragSourceEvent event) {
-				}
+				final Label nodeLabel = new Label(parent, SWT.BORDER);
+				nodeLabel.setText(nodes.get(i).getName());
+				labels.add(nodeLabel);
 				
-				//set the data that will be dragged. (must suit the transfer type.)
-				public void dragSetData(DragSourceEvent event) {
-				   
-					// Provide the data of the requested type.
-					if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
-						event.data = dragLabel.getText();
-					}
-				}
+				//Create a drag source with the label created and the operations.
+				DragSource source = new DragSource(nodeLabel, operations);
 				
-				public void dragFinished(DragSourceEvent event) {
+				//Set the types array to the source.
+				source.setTransfer(types);
+				
+		
+				//add Drag listener to the dragsource
+				source.addDragListener(new DragSourceListener() {
 					
-					// If a move operation has been performed, remove the data
-					// from the source
-					if (event.detail == DND.DROP_MOVE)
-						dragLabel.setText("");
-			     	}
+					//start the drag (can give conditions in which we don't want to start.)
+					public void dragStart(DragSourceEvent event) {
+					}
+					
+					//set the data that will be dragged. (must suit the transfer type.)
+					public void dragSetData(DragSourceEvent event) {
+					   
+						// Provide the data of the requested type.
+						if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
+							event.data = nodeLabel.getText();
+						}
+					}
+					
+					public void dragFinished(DragSourceEvent event) {
+						
+						// If a move operation has been performed, remove the data
+						// from the source
+						if (event.detail == DND.DROP_MOVE)
+							nodeLabel.setText("");
+				     	}
+					
+				   }); //end draglistener adding method.
 				
-			   }); //end draglistener adding method.
+			}
+			
+
 
 	}
 
