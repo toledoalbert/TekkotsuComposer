@@ -74,74 +74,32 @@ public class NodesPart  {
 			//Set the types array to the source.
 			source.setTransfer(types);
 			
-			
-
-			//Canvas creation---***
-			Canvas canvas = new Canvas(parent, SWT.NONE);
-			GridData gd_canvas = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-			canvas.setBackground(SWTResourceManager.getColor(SWT.COLOR_CYAN));
-			gd_canvas.heightHint = 65;
-			canvas.setLayoutData(gd_canvas);
-			//Create root figure and layout container
-		
-			//ArrayList<NodeClass> nodes = new DefaultClassReader().getNodes();
-			//ArrayList<TransitionClass> transitions= new DefaultClassReader().getTransitions();
-			
-			
-		
-
 	
-	
-			
-			canvas.addPaintListener(new PaintListener() { 
-		        public void paintControl(PaintEvent e) { 
-		        	
-		         
-		        	Canvas canvas = (Canvas) e.widget;
-		            int x = canvas.getBounds().width;
-		            int y = canvas.getBounds().height;
-		            e.gc.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		            e.gc.drawPolygon(new int[] { 25,5,45,45,5,45 });
-		            e.gc.fillPolygon(new int[] { 25,5,45,45,5,45 });
-		            //e.gc.drawText("Turn",16,35, true); 
-		            
-		            
-		            //e.gc.drawRectangle(5,5,50,45);
-		           // e.gc.fillRectangle(5, 5, 50, 45);
-		            
-		            
-		            
-		        }
-
-				
-			});
-			
-			
-			 
-	
-	
-	
+			//add Drag listener to the dragsource
 			source.addDragListener(new DragSourceListener() {
-			   public void dragStart(DragSourceEvent event) {
-			      // Only start the drag if there is actually text in the
-			      // label - this text will be what is dropped on the target.
-			      if (dragLabel.getText().length() == 0) {
-			          event.doit = false;
-			      }
-			   }
-			   public void dragSetData(DragSourceEvent event) {
-			     // Provide the data of the requested type.
-			     if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
-			          event.data = dragLabel.getText();
-			     }
-			   }
-			   public void dragFinished(DragSourceEvent event) {
-			     // If a move operation has been performed, remove the data
-			     // from the source
-			     if (event.detail == DND.DROP_MOVE)
-			         dragLabel.setText("");
-			     }
-			   });
+				
+				//start the drag (can give conditions in which we don't want to start.)
+				public void dragStart(DragSourceEvent event) {
+				}
+				
+				//set the data that will be dragged. (must suit the transfer type.)
+				public void dragSetData(DragSourceEvent event) {
+				   
+					// Provide the data of the requested type.
+					if (TextTransfer.getInstance().isSupportedType(event.dataType)) {
+						event.data = dragLabel.getText();
+					}
+				}
+				
+				public void dragFinished(DragSourceEvent event) {
+					
+					// If a move operation has been performed, remove the data
+					// from the source
+					if (event.detail == DND.DROP_MOVE)
+						dragLabel.setText("");
+			     	}
+				
+			   }); //end draglistener adding method.
 
 	}
 
