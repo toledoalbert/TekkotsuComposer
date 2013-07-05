@@ -22,6 +22,7 @@ import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.api.NodeInstance;
 import org.tekkotsu.api.SetupMachine;
 import org.tekkotsu.api.TransitionClass;
+import org.tekkotsu.api.TransitionInstance;
 
 public class MyFirstBehaviorPart {
 	@PostConstruct
@@ -115,10 +116,31 @@ public class MyFirstBehaviorPart {
 			        	//Text transfered from drag source.
 			        	String textIn = (String)event.data;
 			        	
-			        	//Get nodeclass dragged
-			        	NodeInstance nodeDragged = new NodeInstance(nodesMap.get(textIn));
+			        	//Create string to hold output text.
+			        	String textOut = "";
 			        	
-			        	String textOut = nodeDragged.getLabel() + "  color: " + nodeDragged.getColor();
+			        	//Check what is dragged.
+			        	//If its a node.
+			        	if(nodesMap.containsKey(textIn)){
+			        		
+			        		//create instance from it.
+			        		NodeInstance dragged = new NodeInstance(nodesMap.get(textIn));
+			        		
+			        		//Write output text and store in variable.
+			        		textOut = dragged.getLabel() + "  color: " + dragged.getColor();
+			        	}
+			        	else if(transMap.containsKey(textIn)){
+			        		
+			        		//create instance from it.
+			        		TransitionInstance dragged = new TransitionInstance(transMap.get(textIn));
+			        		
+			        		//Write output text and store in variable.
+			        		textOut = dragged.getType().getName().toLowerCase() + " color: " + dragged.getColor();
+			        		
+			        	}
+			        	
+			        	
+			        	
 			        	
 			        	
 			            //Actual drop event-Sets text here
