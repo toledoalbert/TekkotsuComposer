@@ -71,6 +71,7 @@ public class NodesPart  {
 			
 			// Create array of type transfer with texttransfer instance
 			Transfer[] types = new Transfer[] {TextTransfer.getInstance()};
+
 			
 			//go trough the nodeclasses and create a label with name for each.
 			for(int i = 0; i < nodes.size(); i++){

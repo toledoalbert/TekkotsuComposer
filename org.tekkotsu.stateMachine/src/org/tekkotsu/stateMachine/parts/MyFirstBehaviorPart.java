@@ -1,5 +1,9 @@
 package org.tekkotsu.stateMachine.parts;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.annotation.PostConstruct;
 
 import org.eclipse.swt.SWT;
@@ -13,13 +17,49 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
+import org.tekkotsu.api.DefaultClassReader;
+import org.tekkotsu.api.NodeClass;
+import org.tekkotsu.api.NodeInstance;
+import org.tekkotsu.api.SetupMachine;
+import org.tekkotsu.api.TransitionClass;
 
 public class MyFirstBehaviorPart {
 	@PostConstruct
-	public void createUserInterface(Composite parent) {
+	public void createUserInterface(Composite parent) throws FileNotFoundException {
 		
 			// Enable a table as a Drop Target
 			final Table dropTable = new Table(parent, SWT.BORDER);
+			
+			//Create setupmachine for the behavior.
+			final SetupMachine setup = new SetupMachine();
+			
+			//Hashmaps to store the nodeclasses and names.
+			final HashMap<String, NodeClass> nodesMap = new HashMap<String, NodeClass>();
+			final HashMap<String, TransitionClass> transMap = new HashMap<String, TransitionClass>();
+			
+			//ArrayLists to read the default nodes and transitions from xml to.
+			final ArrayList<NodeClass> nodesList = new DefaultClassReader().getNodes();
+			final ArrayList<TransitionClass> transList = new DefaultClassReader().getTransitions();
+			
+			//Adding the names and the objects to the nodesMap.
+			for(int i = 0; i < nodesList.size(); i++){
+				
+				//Current node to operate with.
+				NodeClass currentNode = nodesList.get(i);
+				
+				nodesMap.put(currentNode.getName(), currentNode);
+			}
+		
+			
+			//Adding the names and the objects to the transMap
+			for(int i = 0; i < transList.size(); i++){
+				
+				//Current node to operate with.
+				TransitionClass currentTrans = transList.get(i);
+				
+				transMap.put(currentTrans.getName(), currentTrans);
+				
+			}
 			
 			 
 			// Allow data to be copied or moved to the drop target
@@ -28,8 +68,7 @@ public class MyFirstBehaviorPart {
 			 
 			// Receive data in Text or File format
 			final TextTransfer textTransfer = TextTransfer.getInstance();
-			final FileTransfer fileTransfer = FileTransfer.getInstance();
-			Transfer[] types = new Transfer[] {fileTransfer, textTransfer};
+			Transfer[] types = new Transfer[] {textTransfer};
 			target.setTransfer(types);
 			 
 			target.addDropListener(new DropTargetListener() {
@@ -42,17 +81,7 @@ public class MyFirstBehaviorPart {
 			         }
 			     }
 			     
-			     // will accept text but prefer to have files dropped
-			     for (int i = 0; i < event.dataTypes.length; i++) {
-			         if (fileTransfer.isSupportedType(event.dataTypes[i])){
-			             event.currentDataType = event.dataTypes[i];
-			             // files should only be copied
-			             if (event.detail != DND.DROP_COPY) {
-			                 event.detail = DND.DROP_NONE;
-			             }
-			             break;
-			         }
-			     }
+
 			   }
 			   public void dragOver(DropTargetEvent event) {
 			        event.feedback = DND.FEEDBACK_SELECT | DND.FEEDBACK_SCROLL;
@@ -71,31 +100,36 @@ public class MyFirstBehaviorPart {
 			                event.detail = DND.DROP_NONE;
 			            }
 			        }
-			        // allow text to be moved but files should only be copied
-			        if (fileTransfer.isSupportedType(event.currentDataType)){
-			            if (event.detail != DND.DROP_COPY) {
-			                event.detail = DND.DROP_NONE;
-			            }
-			        }
+			        
 			    }
 			    public void dragLeave(DropTargetEvent event) {
 			    }
 			    public void dropAccept(DropTargetEvent event) {
 			    }
+			    
+			    
+			    //TODO This is where the drop happens.
 			    public void drop(DropTargetEvent event) {
 			        if (textTransfer.isSupportedType(event.currentDataType)) {
-			            String text = (String)event.data;
-			           //Actual drop event-Sets text here
+			            
+			        	//Text transfered from drag source.
+			        	String textIn = (String)event.data;
+			        	
+			        	//Get nodeclass dragged
+			        	NodeInstance nodeDragged = new NodeInstance(nodesMap.get(textIn));
+			        	
+			        	String textOut = nodeDragged.getLabel() + "  color: " + nodeDragged.getColor();
+			        	
+			        	
+			            //Actual drop event-Sets text here
 			            TableItem item = new TableItem(dropTable, SWT.NONE);
-			            item.setText(text);
+			            item.setText(textOut);
+			            
+			            
+			            
+			            
 			        }
-			        if (fileTransfer.isSupportedType(event.currentDataType)){
-			            String[] files = (String[])event.data;
-			            for (int i = 0; i < files.length; i++) {
-			                TableItem item = new TableItem(dropTable, SWT.NONE);
-			                item.setText(files[i]);
-			            }
-			        }
+			        
 			    }
 
 	}); 
