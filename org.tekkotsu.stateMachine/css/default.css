@@ -1,3 +1,10 @@
+Composite Button{
+	swt-width: 100px;
+	swt-height: 50px;
+	font-size: 30px;
+	color: yellow;
+}
+
 Label{
 
 	background-color: white;

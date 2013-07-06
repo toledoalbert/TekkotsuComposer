@@ -14,9 +14,11 @@ import org.eclipse.swt.dnd.DropTargetListener;
 import org.eclipse.swt.dnd.FileTransfer;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 import org.tekkotsu.api.DefaultClassReader;
 import org.tekkotsu.api.NodeClass;
 import org.tekkotsu.api.NodeInstance;
@@ -30,6 +32,15 @@ public class MyFirstBehaviorPart {
 		
 			// Enable a table as a Drop Target
 			final Table dropTable = new Table(parent, SWT.BORDER);
+			
+			//Create button to generate to code.
+			Button fsm = new Button(parent, SWT.BUTTON1);
+			fsm.setText("Get FSM Code!");
+			fsm.setSize(200, 100);
+			
+			//Create the text area for the code.
+			Text code = new Text(parent, SWT.NONE);
+			code.setText("Code will be placed here.");
 			
 			//Create setupmachine for the behavior.
 			final SetupMachine setup = new SetupMachine();
@@ -140,14 +151,11 @@ public class MyFirstBehaviorPart {
 			        	}
 			        	
 			        	
-			        	
-			        	
-			        	
 			            //Actual drop event-Sets text here
 			            TableItem item = new TableItem(dropTable, SWT.NONE);
 			            item.setText(textOut);
 			            
-			            
+			      
 			            
 			            
 			        }
@@ -155,5 +163,7 @@ public class MyFirstBehaviorPart {
 			    }
 
 	}); 
+	
+
 	}
 }
