@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 
+import org.eclipse.draw2d.GridData;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DropTarget;
@@ -16,7 +17,10 @@ import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.tekkotsu.api.DefaultClassReader;
@@ -30,13 +34,39 @@ public class MyFirstBehaviorPart {
 	@PostConstruct
 	public void createUserInterface(Composite parent) throws FileNotFoundException {
 		
+			//Hashmap for table date
+			final HashMap<TransitionInstance, HashMap<ArrayList<NodeInstance>, ArrayList<NodeInstance>> > tableMap = new HashMap<TransitionInstance, HashMap<ArrayList<NodeInstance>, ArrayList<NodeInstance>> >();
+		
 			// Enable a table as a Drop Target
-			final Table dropTable = new Table(parent, SWT.BORDER);
+			final Table dropTable = new Table(parent, SWT.BORDER | SWT.MULTI);
+			final Table sourceTable = new Table(parent, SWT.BORDER);
+			final Table targetTable = new Table(parent, SWT.BORDER);
+			
+			//Set headers visible
+			dropTable.setHeaderVisible(true);
+			sourceTable.setHeaderVisible(true);
+			targetTable.setHeaderVisible(true);	
+			
+			//Create variable to store selected item
+			final TableItem[] selected = new TableItem[1];
+			
+			//Selection listener for the transitions table
+			dropTable.addListener(SWT.DefaultSelection, new Listener(){
+			
+				//Event handler
+				public void handleEvent(Event e){
+					
+					//Get the selected item (Only one, and we pick the first one)
+					selected[0] = dropTable.getSelection()[0];
+					
+					//lookup hashmap
+				}
+				
+			});
 			
 			//Create button to generate to code.
 			Button fsm = new Button(parent, SWT.BUTTON1);
 			fsm.setText("Get FSM Code!");
-			fsm.setSize(200, 100);
 			
 			//Create the text area for the code.
 			Text code = new Text(parent, SWT.NONE);
