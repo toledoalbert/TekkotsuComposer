@@ -3,6 +3,7 @@ package org.tekkotsu.stateMachine.parts;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -34,21 +35,38 @@ public class MyFirstBehaviorPart {
 	@PostConstruct
 	public void createUserInterface(Composite parent) throws FileNotFoundException {
 		
+//////Setup data structures///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+			
 			//Hashmap for table date
-			final HashMap<TransitionInstance, HashMap<ArrayList<NodeInstance>, ArrayList<NodeInstance>> > tableMap = new HashMap<TransitionInstance, HashMap<ArrayList<NodeInstance>, ArrayList<NodeInstance>> >();
+			final HashMap<TransitionInstance, List<List<NodeInstance>>> tableMap = new HashMap<TransitionInstance, List<List<NodeInstance>>>();
 		
-			// Enable a table as a Drop Target
+			//Hashmaps to store the nodeclasses and names.
+			final HashMap<String, NodeClass> nodesMap = new HashMap<String, NodeClass>();
+			final HashMap<String, TransitionClass> transMap = new HashMap<String, TransitionClass>();
+			
+			//ArrayLists to read the default nodes and transitions from xml to.
+			final ArrayList<NodeClass> nodesList = new DefaultClassReader().getNodes();
+			final ArrayList<TransitionClass> transList = new DefaultClassReader().getTransitions();
+			
+///Create the UI Elements ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			
+			// Create tables
 			final Table dropTable = new Table(parent, SWT.BORDER | SWT.MULTI);
 			final Table sourceTable = new Table(parent, SWT.BORDER);
 			final Table targetTable = new Table(parent, SWT.BORDER);
-			
-			//Set headers visible
-			dropTable.setHeaderVisible(true);
-			sourceTable.setHeaderVisible(true);
-			targetTable.setHeaderVisible(true);	
-			
+				
 			//Create variable to store selected item
 			final TableItem[] selected = new TableItem[1];
+			
+			//Create button to generate to code.
+			Button fsm = new Button(parent, SWT.BUTTON1);
+			fsm.setText("Get FSM Code!");
+			
+			//Create the text area for the code.
+			Text code = new Text(parent, SWT.NONE);
+			code.setText("Code will be placed here.");
+			
+///Selection Listener for the  selected transition  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 			
 			//Selection listener for the transitions table
 			dropTable.addListener(SWT.DefaultSelection, new Listener(){
@@ -64,24 +82,7 @@ public class MyFirstBehaviorPart {
 				
 			});
 			
-			//Create button to generate to code.
-			Button fsm = new Button(parent, SWT.BUTTON1);
-			fsm.setText("Get FSM Code!");
-			
-			//Create the text area for the code.
-			Text code = new Text(parent, SWT.NONE);
-			code.setText("Code will be placed here.");
-			
-			//Create setupmachine for the behavior.
-			final SetupMachine setup = new SetupMachine();
-			
-			//Hashmaps to store the nodeclasses and names.
-			final HashMap<String, NodeClass> nodesMap = new HashMap<String, NodeClass>();
-			final HashMap<String, TransitionClass> transMap = new HashMap<String, TransitionClass>();
-			
-			//ArrayLists to read the default nodes and transitions from xml to.
-			final ArrayList<NodeClass> nodesList = new DefaultClassReader().getNodes();
-			final ArrayList<TransitionClass> transList = new DefaultClassReader().getTransitions();
+///Add default values to data structures  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 			
 			//Adding the names and the objects to the nodesMap.
 			for(int i = 0; i < nodesList.size(); i++){
@@ -103,18 +104,30 @@ public class MyFirstBehaviorPart {
 				
 			}
 			
-			 
-			// Allow data to be copied or moved to the drop target
+///DROPS////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			 
+			
+			// Operations declared.
 			int operations = DND.DROP_MOVE | DND.DROP_COPY | DND.DROP_DEFAULT;
+			
+			//TextTransfer object
+			final TextTransfer textTransfer = TextTransfer.getInstance();
+			
+			//Transfer types array to be used
+			Transfer[] types = new Transfer[] {textTransfer};
+			
+			
+//DROPTARGET: Transitions Table /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			
+			//Declare object.
 			DropTarget target = new DropTarget(dropTable, operations);
 			 
-			// Receive data in Text or File format
-			final TextTransfer textTransfer = TextTransfer.getInstance();
-			Transfer[] types = new Transfer[] {textTransfer};
+			//Set transfer types
 			target.setTransfer(types);
 			 
+			//Add the drop listener
 			target.addDropListener(new DropTargetListener() {
-			  public void dragEnter(DropTargetEvent event) {
+			  
+				public void dragEnter(DropTargetEvent event) {
 			     if (event.detail == DND.DROP_DEFAULT) {
 			         if ((event.operations & DND.DROP_COPY) != 0) {
 			             event.detail = DND.DROP_COPY;
@@ -160,39 +173,105 @@ public class MyFirstBehaviorPart {
 			        	//Create string to hold output text.
 			        	String textOut = "";
 			        	
-			        	//Check what is dragged.
-			        	//If its a node.
-			        	if(nodesMap.containsKey(textIn)){
-			        		
-			        		//create instance from it.
-			        		NodeInstance dragged = new NodeInstance(nodesMap.get(textIn));
-			        		
-			        		//Write output text and store in variable.
-			        		textOut = dragged.getLabel() + "  color: " + dragged.getColor();
-			        	}
-			        	else if(transMap.containsKey(textIn)){
-			        		
-			        		//create instance from it.
-			        		TransitionInstance dragged = new TransitionInstance(transMap.get(textIn));
-			        		
-			        		//Write output text and store in variable.
-			        		textOut = dragged.getType().getName().toLowerCase() + " color: " + dragged.getColor();
-			        		
-			        	}
+			        	//create instance from it.
+			        	TransitionInstance dragged = new TransitionInstance(transMap.get(textIn));
 			        	
+			        	//Add instance to the tableMap
+			        	List<List<NodeInstance>> group = new ArrayList<List<NodeInstance>>(2);
+			        	tableMap.put(dragged, );
 			        	
-			            //Actual drop event-Sets text here
+			        	//Write output text and store in variable.
+			        	textOut = dragged.getType().getName().toLowerCase();
+
+			            //Set the label text
 			            TableItem item = new TableItem(dropTable, SWT.NONE);
 			            item.setText(textOut);
-			            
-			      
-			            
-			            
+  
 			        }
 			        
 			    }
 
 	}); 
+			
+//DROPTARGET: Sources Table /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			
+			//Declare object.
+			DropTarget sourceTarget = new DropTarget(sourceTable, operations);
+			 
+			//Set transfer types
+			target.setTransfer(types);
+			 
+			//Add the drop listener
+			target.addDropListener(new DropTargetListener() {
+			  
+				public void dragEnter(DropTargetEvent event) {
+			     if (event.detail == DND.DROP_DEFAULT) {
+			         if ((event.operations & DND.DROP_COPY) != 0) {
+			             event.detail = DND.DROP_COPY;
+			         } else {
+			             event.detail = DND.DROP_NONE;
+			         }
+			     }
+			     
+
+			   }
+			   public void dragOver(DropTargetEvent event) {
+			        event.feedback = DND.FEEDBACK_SELECT | DND.FEEDBACK_SCROLL;
+			        if (textTransfer.isSupportedType(event.currentDataType)) {
+			            // NOTE: on unsupported platforms this will return null
+			            Object o = textTransfer.nativeToJava(event.currentDataType);
+			            String t = (String)o;
+			            if (t != null) System.out.println(t);
+			        }
+			    }
+			    public void dragOperationChanged(DropTargetEvent event) {
+			        if (event.detail == DND.DROP_DEFAULT) {
+			            if ((event.operations & DND.DROP_COPY) != 0) {
+			                event.detail = DND.DROP_COPY;
+			            } else {
+			                event.detail = DND.DROP_NONE;
+			            }
+			        }
+			        
+			    }
+			    public void dragLeave(DropTargetEvent event) {
+			    }
+			    public void dropAccept(DropTargetEvent event) {
+			    }
+			    
+			    
+			    //TODO This is where the drop happens.
+			    public void drop(DropTargetEvent event) {
+			        if (textTransfer.isSupportedType(event.currentDataType)) {
+			            
+			        	//Text transfered from drag source.
+			        	String textIn = (String)event.data;
+			        	
+			        	//Create string to hold output text.
+			        	String textOut = "";
+			        	
+			        	//create instance from it.
+			        	NodeInstance dragged = new NodeInstance(nodesMap.get(textIn));
+			        	
+			        	//Add instance to the tableMap
+			        	tableMap.get(selected);
+			        	
+			        	HashMap<ArrayList<NodeInstance>,ArrayList<NodeInstance>> sourceTargetMap = new HashMap<ArrayList<NodeInstance>,ArrayList<NodeInstance>>();
+			        	sourceTargetMap.put(new ArrayList<NodeInstance>(), new ArrayList<NodeInstance>());
+			        	tableMap.put(dragged, new HashMap<ArrayList<NodeInstance>,ArrayList<NodeInstance>>());
+			        	
+			        	//Write output text and store in variable.
+			        	textOut = dragged.getType().getName().toLowerCase();
+
+			            //Set the label text
+			            TableItem item = new TableItem(dropTable, SWT.NONE);
+			            item.setText(textOut);
+  
+			        }
+			        
+			    }
+
+	}); 			
 	
 
 	}
