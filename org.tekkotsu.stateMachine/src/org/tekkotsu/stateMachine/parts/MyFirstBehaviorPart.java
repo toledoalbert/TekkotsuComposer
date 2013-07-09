@@ -48,6 +48,9 @@ public class MyFirstBehaviorPart {
 			final ArrayList<NodeClass> nodesList = new DefaultClassReader().getNodes();
 			final ArrayList<TransitionClass> transList = new DefaultClassReader().getTransitions();
 			
+			//Create the setup machine for the behavior
+			final SetupMachine setup = new SetupMachine();
+			
 ///Create the UI Elements ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 			
 			// Create tables
@@ -103,14 +106,29 @@ public class MyFirstBehaviorPart {
 			//Transfer types array to be used
 			final Transfer[] types = new Transfer[] {textTransfer};
 			
-			
-//DROPTARGET: Transitions Table /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			//Declare object.
+			final DropTarget sourceTarget = new DropTarget(sourceTable, operations);
+			 
+			//Set transfer types
+			sourceTarget.setTransfer(types);
 			
 			//Declare object.
-			DropTarget target = new DropTarget(dropTable, operations);
+			final DropTarget target = new DropTarget(dropTable, operations);
 			 
 			//Set transfer types
 			target.setTransfer(types);
+			
+			//Declare object.
+			final DropTarget targetTarget = new DropTarget(targetTable, operations);
+			 
+			//Set transfer types
+			targetTarget.setTransfer(types);
+			 
+			
+			
+//DROPTARGET: Transitions Table /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
+			
+
 			 
 			//Add the drop listener
 			target.addDropListener(new DropTargetListener() {
@@ -164,6 +182,9 @@ public class MyFirstBehaviorPart {
 			        	//create instance from it.
 			        	TransitionInstance dragged = new TransitionInstance(transMap.get(textIn));
 			        	
+			        	//Add instance to the setup machine
+			        	//setup.addTransition(dragged);
+			        	
 			        	//Set the item text
 			            TableItem item = new TableItem(dropTable, SWT.NONE);
 			            
@@ -203,123 +224,241 @@ public class MyFirstBehaviorPart {
 					
 					//Get the selected item (Only one, and we pick the first one)
 					selected[0] = dropTable.getSelection()[0];
+					
+					
 							
 					
-//DROPTARGET: Sources Table /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////								
-					
-					
-					//Declare object.
-					DropTarget sourceTarget = new DropTarget(sourceTable, operations);
-					 
-					//Set transfer types
-					sourceTarget.setTransfer(types);
-					 
-					//Add the drop listener
-					sourceTarget.addDropListener(new DropTargetListener() {
-					  
-						public void dragEnter(DropTargetEvent event) {
-					     if (event.detail == DND.DROP_DEFAULT) {
-					         if ((event.operations & DND.DROP_COPY) != 0) {
-					             event.detail = DND.DROP_COPY;
-					         } else {
-					             event.detail = DND.DROP_NONE;
-					         }
-					     }
-					     
-
-					   }
-					   public void dragOver(DropTargetEvent event) {
-					        event.feedback = DND.FEEDBACK_SELECT | DND.FEEDBACK_SCROLL;
-					        if (textTransfer.isSupportedType(event.currentDataType)) {
-					            // NOTE: on unsupported platforms this will return null
-					            Object o = textTransfer.nativeToJava(event.currentDataType);
-					            String t = (String)o;
-					            if (t != null) System.out.println(t);
-					        }
-					    }
-					    public void dragOperationChanged(DropTargetEvent event) {
-					        if (event.detail == DND.DROP_DEFAULT) {
-					            if ((event.operations & DND.DROP_COPY) != 0) {
-					                event.detail = DND.DROP_COPY;
-					            } else {
-					                event.detail = DND.DROP_NONE;
-					            }
-					        }
-					        
-					    }
-					    public void dragLeave(DropTargetEvent event) {
-					    }
-					    public void dropAccept(DropTargetEvent event) {
-					    }
-					    
-					    
-					    //TODO This is where the drop happens.
-					    public void drop(DropTargetEvent event) {
-					        if (textTransfer.isSupportedType(event.currentDataType)) {
-					            
-					        	//Text transfered from drag source.
-					        	String textIn = (String)event.data;
-					        	
-					        	System.out.println(textIn);
-					        	
-					        	//Create string to hold output text.
-					        	String textOut = "";
-					        	
-					        	//create instance from it.
-					        	NodeInstance dragged = new NodeInstance(nodesMap.get(textIn));
-					        	
-					        	//Add instance to the tableMap
-					        	
-					        	if(selected[0]==null){
-					        		System.out.println("selected is null");
-					        	}
-					        	
-					        	List<List<NodeInstance>> list2 = tableMap.get(selected[0]);
-					        	List<NodeInstance> list3 = list2.get(0);
-					        	list3.add(dragged);
-					        	
-					        	//tableMap.get(selected[0]).get(0).add(dragged);
-					        	
-					        	//Write output text and store in variable.
-					        	textOut = dragged.getType().getName().toLowerCase();
-
-					            //Set the label text
-					            TableItem item = new TableItem(sourceTable, SWT.NONE);
-					            item.setText(textOut);
-		  
-					        }
-					        
-					    }
-
-			}); 			
-					
-					
-////////////////////////////////////////////////END SOURCES TABLE DROP///////////////					
 					
 					
 					
+////////////////////////////CLEAN THE SOURCES AND SHOW NEW ONES///////////////////////////
 					
+					//Remove all the items.
+					sourceTable.removeAll();
 					
+					//add the items from sources of the selected one.
+					for(int i = 0; i < tableMap.get(selected[0]).get(0).size(); i++){
+						
+						TableItem sourceItem = new TableItem(sourceTable, SWT.NONE);
+						sourceItem.setText(tableMap.get(selected[0]).get(0).get(i).getLabel());
+						
+					}
 					
+/////////////////////CLEAN THE TARGETS AND SHOW NEW ONES///////////////////////////
 					
+					//Remove all the items.
+					targetTable.removeAll();
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+					//add the items from sources of the selected one.
+					for(int i = 0; i < tableMap.get(selected[0]).get(1).size(); i++){
+						
+						TableItem sourceItem = new TableItem(targetTable, SWT.NONE);
+						sourceItem.setText(tableMap.get(selected[0]).get(1).get(i).getLabel());
+						
+					}					
 					
 				}
 				
 			});
 			
 ////////////////////////END SELECTED ITEM LISTENER////////////////////////////////////////////
+			
+			
+
+			
+			
+			
+			//DROPTARGET: Sources Table /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////								
+			
+			
+
+			 
+			//Add the drop listener
+			sourceTarget.addDropListener(new DropTargetListener() {
+			  
+				public void dragEnter(DropTargetEvent event) {
+			     if (event.detail == DND.DROP_DEFAULT) {
+			         if ((event.operations & DND.DROP_COPY) != 0) {
+			             event.detail = DND.DROP_COPY;
+			         } else {
+			             event.detail = DND.DROP_NONE;
+			         }
+			     }
+			     
+
+			   }
+			   public void dragOver(DropTargetEvent event) {
+			        event.feedback = DND.FEEDBACK_SELECT | DND.FEEDBACK_SCROLL;
+			        if (textTransfer.isSupportedType(event.currentDataType)) {
+			            // NOTE: on unsupported platforms this will return null
+			            Object o = textTransfer.nativeToJava(event.currentDataType);
+			            String t = (String)o;
+			            if (t != null) System.out.println(t);
+			        }
+			    }
+			    public void dragOperationChanged(DropTargetEvent event) {
+			        if (event.detail == DND.DROP_DEFAULT) {
+			            if ((event.operations & DND.DROP_COPY) != 0) {
+			                event.detail = DND.DROP_COPY;
+			            } else {
+			                event.detail = DND.DROP_NONE;
+			            }
+			        }
+			        
+			    }
+			    public void dragLeave(DropTargetEvent event) {
+			    }
+			    public void dropAccept(DropTargetEvent event) {
+			    }
+			    
+			    
+			    //TODO This is where the drop happens.
+			    public void drop(DropTargetEvent event) {
+			        if (textTransfer.isSupportedType(event.currentDataType)) {
+			            
+			        	//Text transfered from drag source.
+			        	String textIn = (String)event.data;
+			        	
+			        	System.out.println(textIn);
+			        	
+			        	//Create string to hold output text.
+			        	String textOut = "";
+			        	
+			        	//create instance from it.
+			        	NodeInstance dragged = new NodeInstance(nodesMap.get(textIn));
+			        	
+			        	//Add to setup machine
+			        	//setup.addNode(dragged);
+			        	
+			        	
+			        	//Add instance to the tableMap
+			        	List<List<NodeInstance>> list2 = tableMap.get(selected[0]);
+			        	List<NodeInstance> list3 = list2.get(0);
+			        	list3.add(dragged);
+			        	
+			        	//tableMap.get(selected[0]).get(0).add(dragged);
+			        	
+			        	//Write output text and store in variable.
+			        	textOut = dragged.getType().getName().toLowerCase();
+
+			            //Set the label text
+			            TableItem item = new TableItem(sourceTable, SWT.NONE);
+			            item.setText(textOut);
+  
+			        }
+			        
+			    }
+
+	}); 			
+			
+			
+////////////////////////////////////////////////END SOURCES TABLE DROP///////////////					
+			
+			
+			
+//DROPTARGET: Targets Table /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////								
+			
+			
+			
+			//Add the drop listener
+			targetTarget.addDropListener(new DropTargetListener() {
+			  
+				public void dragEnter(DropTargetEvent event) {
+			     if (event.detail == DND.DROP_DEFAULT) {
+			         if ((event.operations & DND.DROP_COPY) != 0) {
+			             event.detail = DND.DROP_COPY;
+			         } else {
+			             event.detail = DND.DROP_NONE;
+			         }
+			     }
+			     
+
+			   }
+			   public void dragOver(DropTargetEvent event) {
+			        event.feedback = DND.FEEDBACK_SELECT | DND.FEEDBACK_SCROLL;
+			        if (textTransfer.isSupportedType(event.currentDataType)) {
+			            // NOTE: on unsupported platforms this will return null
+			            Object o = textTransfer.nativeToJava(event.currentDataType);
+			            String t = (String)o;
+			            if (t != null) System.out.println(t);
+			        }
+			    }
+			    public void dragOperationChanged(DropTargetEvent event) {
+			        if (event.detail == DND.DROP_DEFAULT) {
+			            if ((event.operations & DND.DROP_COPY) != 0) {
+			                event.detail = DND.DROP_COPY;
+			            } else {
+			                event.detail = DND.DROP_NONE;
+			            }
+			        }
+			        
+			    }
+			    public void dragLeave(DropTargetEvent event) {
+			    }
+			    public void dropAccept(DropTargetEvent event) {
+			    }
+			    
+			    
+			    //TODO This is where the drop happens.
+			    public void drop(DropTargetEvent event) {
+			        if (textTransfer.isSupportedType(event.currentDataType)) {
+			            
+			        	//Text transfered from drag source.
+			        	String textIn = (String)event.data;
+			        	
+			        	System.out.println(textIn);
+			        	
+			        	//Create string to hold output text.
+			        	String textOut = "";
+			        	
+			        	//create instance from it.
+			        	NodeInstance dragged = new NodeInstance(nodesMap.get(textIn));
+			        	
+			        	//Add instance to the tableMap
+			        	
+			        	if(selected[0]==null){
+			        		System.out.println("selected is null");
+			        	}
+			        	
+			        	List<List<NodeInstance>> list2 = tableMap.get(selected[0]);
+			        	List<NodeInstance> list3 = list2.get(1);
+			        	list3.add(dragged);
+			        	
+			        	//tableMap.get(selected[0]).get(0).add(dragged);
+			        	
+			        	//Write output text and store in variable.
+			        	textOut = dragged.getType().getName().toLowerCase();
+
+			            //Set the label text
+			            TableItem item = new TableItem(targetTable, SWT.NONE);
+			            item.setText(textOut);
+  
+			        }
+			        
+			    }
+
+	}); 								
+			
+			
+////////////////////////////////////////////////END TARGETS TABLE DROP///////////////				
+			
+			
+			
+			
+			
+			
+////////////////////////////////BUTTON LISTENER/////////////////////////////////////////////////////////////
+			/*
+			fsm.addListener(SWT.Selection, new Listener(){
+				
+				public void handleEvent(Event event){
+					
+					tableMap.
+					
+				}
+				
+				
+			});*/
 
 	}
 }
